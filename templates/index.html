@@ -1,0 +1,1699 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drishti · Smart Personal Eye Health Platform</title>
+  <meta name="description"
+    content="Drishti is a personal eye health platform providing automated glaucoma risk screening, private medical record storage, specialist doctor discovery, eye anatomy learning, and care reminders.">
+  <link rel="stylesheet" href="/static/style.css?v=20261026b">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <a class="brand" href="#home" id="brandLink">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        style="vertical-align:middle;margin-right:4px;">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+      <span id="brandName">Drishti</span>
+    </a>
+
+    <nav aria-label="Main navigation" id="mainNav">
+      <a href="#dashboard" data-page-link="dashboard" id="navDashboard">Dashboard</a>
+      <a href="#screen" data-page-link="screen" id="navScreen">AI Analysis</a>
+      <a href="#records" data-page-link="records" id="navRecords">My Records</a>
+      <a href="#journey" data-page-link="journey" id="navJourney">Eye Journey</a>
+      <a href="#doctors" data-page-link="doctors" id="navDoctors">Find Doctor</a>
+      <a href="#learn" data-page-link="learn" id="navLearn">Eye Health</a>
+      <a href="#anatomy" data-page-link="anatomy" id="navAnatomy">Eye Anatomy</a>
+      <a href="#quiz" data-page-link="quiz" id="navQuiz">Eye Quiz</a>
+    </nav>
+
+    <div class="tools">
+      <select id="language" aria-label="Select Interface Language">
+        <option value="en">English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिंदी</option>
+      </select>
+
+      <a class="button outline small" href="#account" id="accountLink">Sign in</a>
+
+      <button class="soft" id="accessBtn" type="button" aria-haspopup="dialog" aria-expanded="false"
+        title="Accessibility controls">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          style="vertical-align:middle;margin-right:3px;">
+          <circle cx="12" cy="12" r="10" />
+          <path d="m4.93 4.93 4.24 4.24" />
+          <path d="m14.83 9.17 4.24-4.24" />
+          <path d="m14.83 14.83 4.24 4.24" />
+          <path d="m9.17 14.83-4.24 4.24" />
+          <circle cx="12" cy="12" r="4" />
+        </svg>
+        <span id="accessBtnText">Accessibility</span>
+      </button>
+
+      <button class="soft" id="voice" type="button" aria-pressed="false" title="Listen to current page content">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          style="vertical-align:middle;margin-right:4px;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+        <span id="voiceBtnText">Listen</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME PAGE -->
+    <section class="hero" id="home" data-page="home">
+      <div class="hero-copy">
+        <span class="eyebrow" id="heroEyebrow">PERSONAL EYE HEALTH · SCREEN · STORE · TRACK</span>
+        <h1 id="heroTitle">Your eyes. Your records. Your journey.</h1>
+        <p id="heroSub">Understand your eye health, keep records organized, and explore eye-care services in one calm
+          place.</p>
+        <div class="actions">
+          <a class="button" href="#screen" id="checkBtn">Check my eyes</a>
+          <a class="button outline" href="#dashboard" id="dashboardHeroBtn">Open Dashboard</a>
+          <a class="button outline" href="#learn" id="exploreHeroBtn">Explore eye health</a>
+        </div>
+        <p class="disclaimer" id="homeDisclaimer">Screening and educational information only. Not a medical diagnosis.
+        </p>
+      </div>
+
+      <div class="hero-art">
+        <div class="orb">
+          <div class="eye-shape">
+            <div class="iris">
+              <div class="pupil"></div>
+            </div>
+          </div>
+        </div>
+        <div class="float-card">
+          <span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path
+                d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+            </svg>
+          </span>
+          <div>
+            <b id="floatCardTitle">Your eye-health journey</b>
+            <small id="floatCardSub">Records · Learning · Follow-up</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS STRIP -->
+    <section class="stats" data-page="home">
+      <article>
+        <span>01</span>
+        <b id="statScreenTitle">Screen</b>
+        <small id="statScreenSub">Automated glaucoma risk screening assistant</small>
+      </article>
+      <article>
+        <span>02</span>
+        <b id="statStoreTitle">Store</b>
+        <small id="statStoreSub">Keep a list of reports and files</small>
+      </article>
+      <article>
+        <span>03</span>
+        <b id="statUnderstandTitle">Understand</b>
+        <small id="statUnderstandSub">Learn with simple explanations</small>
+      </article>
+      <article>
+        <span>04</span>
+        <b id="statFindCareTitle">Find care</b>
+        <small id="statFindCareSub">Explore directory entries</small>
+      </article>
+    </section>
+
+    <!-- PRODUCT WALKTHROUGH TOUR -->
+    <section id="walkthrough" class="section tinted" data-page="home">
+      <div class="section-head">
+        <span class="eyebrow" id="walkthroughEyebrow">A QUICK PRODUCT TOUR</span>
+        <h2 id="walkthroughTitle">See how Drishti works</h2>
+        <p id="walkthroughDesc">A short animated walkthrough shows where to start, how to save records, and how to
+          revisit your eye-health journey.</p>
+      </div>
+      <div class="tour-layout">
+        <div class="tour-screen">
+          <div class="tour-windowbar">
+            <i></i><i></i><i></i>
+            <span>Drishti · Preview</span>
+          </div>
+          <div class="tour-preview">
+            <div class="tour-sidebar">
+              <b>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  style="vertical-align:middle;margin-right:2px;">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg> Drishti
+              </b>
+              <span class="tour-nav active"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px;">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                </svg> Overview</span>
+              <span class="tour-nav"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" style="vertical-align:middle;margin-right:3px;">
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg> AI Analysis</span>
+              <span class="tour-nav"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" style="vertical-align:middle;margin-right:3px;">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                </svg> My Records</span>
+              <span class="tour-nav"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" style="vertical-align:middle;margin-right:3px;">
+                  <polyline points="7 7 17 7 17 17" />
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                </svg> Eye Journey</span>
+            </div>
+            <div class="tour-content">
+              <span class="pill" id="tourPill">WELCOME</span>
+              <h3 id="tourTitle">Your eye-health space</h3>
+              <p id="tourText">Start from the home page and choose what you want to do.</p>
+              <div class="tour-demo-card">
+                <div class="tour-demo-icon" id="tourIcon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+                  </svg>
+                </div>
+                <div>
+                  <b id="tourCardTitle">Everything in one place</b>
+                  <small id="tourCardText">Screening · Records · Care</small>
+                </div>
+              </div>
+              <div class="tour-progress"><span id="tourProgress"></span></div>
+            </div>
+          </div>
+          <div class="tour-caption">
+            <span class="pulse-dot"></span>
+            <span id="tourCaption">Playing product tour</span>
+            <button class="soft" id="tourPause" type="button">Pause</button>
+          </div>
+        </div>
+        <div class="tour-steps">
+          <button class="tour-step active" data-tour-step="0"><span>01</span>
+            <div><b id="tourStep1Title">Start at Home</b><small id="tourStep1Sub">Get familiar with the main
+                features.</small></div>
+          </button>
+          <button class="tour-step" data-tour-step="1"><span>02</span>
+            <div><b id="tourStep2Title">Try AI Analysis</b><small id="tourStep2Sub">Upload your eye photo and answer
+                health questions.</small></div>
+          </button>
+          <button class="tour-step" data-tour-step="2"><span>03</span>
+            <div><b id="tourStep3Title">Attach My Records</b><small id="tourStep3Sub">Add reports and notes to your
+                personal vault.</small></div>
+          </button>
+          <button class="tour-step" data-tour-step="3"><span>04</span>
+            <div><b id="tourStep4Title">Review Eye Journey</b><small id="tourStep4Sub">Return to your saved screening
+                history.</small></div>
+          </button>
+          <button class="button full" type="button" id="tourStart"><span id="tourStartText">Start using Drishti</span>
+            <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 1: MY EYE HEALTH DASHBOARD -->
+    <section id="dashboard" class="section tinted" data-page="dashboard">
+      <div class="section-head">
+        <span class="eyebrow" id="dashEyebrow">PERSONALIZED EYE HEALTH SUMMARY</span>
+        <h2 id="dashHeading">My Eye Health Dashboard</h2>
+        <p id="dashSub">A unified view of your latest glaucoma screening, medical records, appointment requests, and
+          ocular reminders.</p>
+      </div>
+
+      <!-- User Welcome Strip -->
+      <div class="panel dash-welcome-banner" id="dashWelcomeBanner">
+        <div class="dash-welcome-text">
+          <h3 id="dashWelcomeUser">Welcome to your Eye Health Space</h3>
+          <p id="dashWelcomeStatus" class="muted">Sign in to sync your personal screening evaluations, clinical records,
+            and appointments.</p>
+        </div>
+        <div class="dash-welcome-action">
+          <a href="#screen" class="button small" id="dashScreenNowBtn">New AI Screening</a>
+          <button type="button" class="soft small" id="dashRefreshBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+              <path d="M21 3v5h-5" />
+              <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+              <path d="M3 21v-5h5" />
+            </svg>
+            <span id="dashRefreshText">Refresh Data</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="dash-stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon" style="background:#e6f4f1;color:#168b8b;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </div>
+          <div>
+            <small id="dashMetric1Label">Latest AI Result</small>
+            <b id="dashMetric1Value">—</b>
+            <span id="dashMetric1Sub" class="tiny muted">No screening completed yet</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon" style="background:#eaf5fb;color:#0e7490;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+          </div>
+          <div>
+            <small id="dashMetric2Label">Glaucoma Risk Score</small>
+            <b id="dashMetric2Value">—</b>
+            <span id="dashMetric2Sub" class="tiny muted">CDR & Risk Probability</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon" style="background:#fef3c7;color:#d97706;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+          </div>
+          <div>
+            <small id="dashMetric3Label">Health Records Vault</small>
+            <b id="dashMetric3Value">0</b>
+            <span id="dashMetric3Sub" class="tiny muted">Saved clinical reports</span>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon" style="background:#f3e8ff;color:#7e22ce;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <div>
+            <small id="dashMetric4Label">Care Reminders</small>
+            <b id="dashMetric4Value">0</b>
+            <span id="dashMetric4Sub" class="tiny muted">Active schedule</span>
+          </div>
+        </article>
+      </div>
+
+      <!-- Dashboard Two Column Detail Section -->
+      <div class="two-col" style="margin-top:20px;">
+        <!-- Left Column: Latest Screening Card & History -->
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <article class="panel" id="dashLatestPanel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h3 id="dashLatestCardTitle" style="margin:0;">Latest Glaucoma Screening</h3>
+              <span class="pill" id="dashLatestDatePill">Pending</span>
+            </div>
+            <div id="dashLatestContent">
+              <div class="empty" id="dashLatestEmpty">
+                <p id="dashNoScreeningText">No recent screening result found. Complete an AI screening to view your
+                  ocular risk assessment here.</p>
+                <a href="#screen" class="button small" style="margin-top:10px;" id="dashStartScreenBtn">Start AI
+                  Screening</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h3 id="dashHistoryCardTitle" style="margin:0;">Screening Timeline</h3>
+              <a href="#journey" class="soft small" id="dashViewJourneyBtn">Open Journey →</a>
+            </div>
+            <div id="dashHistoryList">
+              <p class="empty" id="dashHistoryEmpty">Your previous screening evaluations will appear here.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Right Column: Upcoming Appointments & Reminders -->
+        <div style="display:flex;flex-direction:column;gap:18px;">
+          <article class="panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h3 id="dashAptCardTitle" style="margin:0;">Upcoming Appointments</h3>
+              <a href="#doctors" class="soft small" id="dashFindDocLink">Book Specialist →</a>
+            </div>
+            <div id="dashAptList">
+              <p class="empty" id="dashAptEmpty">No upcoming doctor appointments scheduled. Explore the specialist
+                directory to book a consultation.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div
+              style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+              <h3 id="dashRemindersCardTitle" style="margin:0;">Eye Care Reminders</h3>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <button type="button" class="button small" id="dashAddReminderBtn">+ Add Reminder</button>
+                <a href="#reminders" class="soft small" id="dashManageRemindersBtn">Manage All →</a>
+              </div>
+            </div>
+            <div id="dashRemindersList">
+              <p class="empty" id="dashRemindersEmpty">No active eye care reminders. Add a checkup or medication
+                reminder.</p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3 id="dashQuickNavTitle" style="margin-bottom:12px;">Quick Modules</h3>
+            <div class="dash-quick-links">
+              <a href="#screen" class="dash-quick-item"><span class="dash-qi-icon"><svg width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 18h8" />
+                    <path d="M3 22h18" />
+                    <path d="m14 12 3 3" />
+                    <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3" />
+                    <path d="M9 14h2" />
+                    <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z" />
+                  </svg></span><b id="dqScreen">AI
+                  Analysis</b><small id="dqScreenSub">Glaucoma screening</small></a>
+              <a href="#records" class="dash-quick-item"><span class="dash-qi-icon"><svg width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path
+                      d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" />
+                  </svg></span><b id="dqRecords">My
+                  Records</b><small id="dqRecordsSub">Medical vault</small></a>
+              <a href="#journey" class="dash-quick-item"><span class="dash-qi-icon"><svg width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                    <polyline points="16 7 22 7 22 13" />
+                  </svg></span><b id="dqJourney">Eye
+                  Journey</b><small id="dqJourneySub">Screening timeline</small></a>
+              <a href="#doctors" class="dash-quick-item"><span class="dash-qi-icon"><svg width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="19" y1="8" x2="19" y2="14" />
+                    <line x1="16" y1="11" x2="22" y2="11" />
+                  </svg></span><b id="dqDoctors">Find
+                  Doctor</b><small id="dqDoctorsSub">Eye specialist clinics</small></a>
+              <a href="#learn" class="dash-quick-item"><span class="dash-qi-icon"><svg width="22" height="22"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  </svg></span><b id="dqLearn">Eye
+                  Health</b><small id="dqLearnSub">Library & daily tips</small></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI SCREENING & ANALYSIS -->
+    <section id="screen" class="section" data-page="screen">
+      <div class="section-head">
+        <span class="eyebrow" id="screenEyebrow">AI SCREENING & ANALYSIS</span>
+        <h2 id="screenHeading">Glaucoma Eye Screening</h2>
+        <p id="screenSub">Upload a retinal or fundus eye photo for automated glaucoma risk screening.</p>
+      </div>
+
+      <div class="two-col screening-grid">
+        <article class="panel" id="eyeInputPanel">
+          <h3 id="panel1Heading">1. Eye image input</h3>
+          <p class="muted" id="panel1Desc">Provide a retinal or fundus eye photo via file upload.</p>
+          <div id="uploadPanel">
+            <div id="uploadDropZone" class="upload-zone" tabindex="0" role="button"
+              aria-label="Upload eye photo drop zone">
+              <input type="file" id="eyePhotoInput" accept=".jpg,.jpeg,.png,.webp" hidden>
+              <div class="upload-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+              </div>
+              <p><strong id="dropZonePrompt">Click to browse</strong> <span id="dropZoneOr">or drag & drop eye
+                  photo</span></p>
+              <small class="muted" id="dropZoneTypes">Supports JPG, PNG, or WEBP (Max 5MB)</small>
+            </div>
+
+            <div id="uploadPreviewWrap" class="upload-preview-wrap" hidden>
+              <div class="preview-box">
+                <img id="uploadPreviewImg" alt="Selected eye photo preview">
+                <span class="preview-tag" id="previewTagText">Eye photo loaded</span>
+              </div>
+              <div class="actions">
+                <button type="button" class="button outline small" id="changePhotoBtn">Change photo</button>
+                <button type="button" class="soft small" id="removePhotoBtn">Remove</button>
+              </div>
+            </div>
+            <p id="uploadMsg" class="form-message" aria-live="polite"></p>
+          </div>
+        </article>
+
+        <article class="panel" id="riskQuestionsPanel">
+          <h3 id="panel2Heading">2. Clinical risk questions</h3>
+          <label id="ageLabel">Age *
+            <input id="age" type="number" min="1" max="120" placeholder="Enter age (required)" required>
+          </label>
+          <div class="checks">
+            <label><input type="checkbox" data-w="2"> <span id="chkFamily">Family member with glaucoma</span></label>
+            <label><input type="checkbox" data-w="1"> <span id="chkDiabetes">Diabetes</span></label>
+            <label><input type="checkbox" data-w="1"> <span id="chkNearsighted">Very nearsighted</span></label>
+            <label><input type="checkbox" data-w="1"> <span id="chkSteroids">Long-term steroid use</span></label>
+            <label><input type="checkbox" data-w="2"> <span id="chkHalos">Halos around lights</span></label>
+            <label><input type="checkbox" data-w="2"> <span id="chkEyePain">Eye pain/headache with blurred
+                vision</span></label>
+            <label><input type="checkbox" data-w="2"> <span id="chkSideVision">Losing side vision</span></label>
+            <label><input type="checkbox" data-w="1"> <span id="chkNoExam">No eye exam in the last 2
+                years</span></label>
+          </div>
+          <button class="button full" id="analyze">Run Glaucoma AI Screening</button>
+          <p id="analyzeMsg" class="form-message" aria-live="polite"></p>
+        </article>
+      </div>
+
+      <!-- Analysis Loading State -->
+      <article class="panel loading-panel" id="analysisLoading" hidden>
+        <div class="loader-scanner"></div>
+        <h3 id="loaderTitle">Analyzing ocular image...</h3>
+        <p id="loaderSub" class="muted">Scanning optic disc, cup-to-disc ratio & risk factors</p>
+        <div class="tour-progress" style="max-width:320px;margin:14px auto 0;">
+          <span id="analysisProgress" style="width:20%;transition:width .4s;"></span>
+        </div>
+      </article>
+
+      <!-- Analysis Results Card -->
+      <article class="panel result" id="result" hidden>
+        <div class="result-header">
+          <span class="eyebrow" id="resultEyebrow">PRELIMINARY SCREENING REPORT</span>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <span id="predictionBadge" class="result-badge normal">Negative · Normal</span>
+            <span class="confidence-box" id="confidenceBox"><span id="aiConfPrefix">AI confidence:</span> <strong
+                id="confidenceVal">—</strong></span>
+          </div>
+        </div>
+        <h2 id="riskTitle">—</h2>
+        <p id="riskAdvice"></p>
+
+        <div class="biomarkers-grid">
+          <div class="biomarker-card">
+            <small id="bioCdrLabel">Cup-to-Disc Ratio (CDR)</small>
+            <b id="cdrValue">—</b>
+            <span id="cdrStatus">Awaiting image</span>
+          </div>
+          <div class="biomarker-card">
+            <small id="bioClassLabel">Glaucoma Classification</small>
+            <b id="classificationValue">—</b>
+            <span id="classificationStatus">Preliminary AI Assessment</span>
+          </div>
+          <div class="biomarker-card">
+            <small id="bioGuidanceLabel">Specialist Guidance</small>
+            <b id="guidanceValue">—</b>
+            <span id="guidanceStatus">Clinical Consultation</span>
+          </div>
+        </div>
+
+        <h4 style="margin:16px 0 8px;" id="riskFactorsTitle">Reported risk factors (questionnaire - not used by the AI
+          result):</h4>
+        <ul id="reasons"></ul>
+
+        <div class="disclaimer-box">
+          <strong id="screeningNoticeTitle">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg> Educational Screening Notice:
+          </strong>
+          <p id="screeningNoticeText">This screening is powered by an automated AI image analysis system. AI screening
+            can make mistakes and is intended for routine health education and guidance only. It is not an official
+            medical diagnosis. Please consult a licensed ophthalmologist or eye care specialist for clinical diagnosis.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="button pdf-btn" id="downloadPdfBtn" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+              style="vertical-align:middle;margin-right:6px;">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+            <span id="downloadPdfBtnText">Download PDF Report</span>
+          </button>
+          <button class="button outline" id="saveResult" type="button">Save to my journey</button>
+        </div>
+        <p id="pdfStatusMsg" class="form-message" style="margin-top:8px;" aria-live="polite"></p>
+        <span id="saveMessage" class="muted"></span>
+      </article>
+    </section>
+
+    <!-- MY RECORDS -->
+    <section id="records" data-page="records" class="section tinted">
+      <div class="section-head">
+        <span class="eyebrow" id="recordsEyebrow">YOUR HEALTH VAULT</span>
+        <h2 id="recordsHeading">My records</h2>
+        <p id="recordsSub">Upload a report or add a record note. Private, authenticated, and securely stored to your
+          personal account.</p>
+      </div>
+
+      <div class="panel">
+        <form id="recordForm" class="record-form">
+          <label><span id="recTitleLabel">Record title *</span>
+            <input required name="title" id="recTitleInput" placeholder="e.g. Eye examination report">
+          </label>
+          <label><span id="recTypeLabel">Type</span>
+            <select name="record_type" id="recTypeInput">
+              <option value="Eye report">Eye report</option>
+              <option value="Eye image">Eye image</option>
+              <option value="Fundus photo">Fundus photo</option>
+              <option value="OCT scan">OCT scan</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Test result">Test result</option>
+              <option value="Hospital document">Hospital document</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label><span id="recDateLabel">Date</span>
+            <input name="record_date" id="recDateInput" type="date">
+          </label>
+          <label><span id="recFileLabel">File attachment (JPG, PNG, WEBP, PDF up to 8MB)</span>
+            <input name="file" id="recFileInput" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf">
+          </label>
+          <label><span id="recDescLabel">Description / Note</span>
+            <input name="description" id="recDescInput" placeholder="Clinical notes, doctor advice, or symptoms">
+          </label>
+          <button class="button" type="submit" id="recSubmitBtn">Add record</button>
+        </form>
+        <p id="recordFormMsg" class="form-message" style="margin:8px 0 12px;" aria-live="polite"></p>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 10px;">
+          <h3 style="margin:0;font-size:16px;" id="savedRecordsHeading">Saved Records</h3>
+          <button type="button" class="soft small" id="refreshRecordsBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+              <path d="M21 3v5h-5" />
+              <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+              <path d="M3 21v-5h5" />
+            </svg>
+            <span id="refreshRecordsBtnText">Refresh</span>
+          </button>
+        </div>
+
+        <div id="recordList" class="records-table-wrap">
+          <p class="empty" id="recordsEmptyText">Your eye-health journey starts here. Add your first record.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EYE JOURNEY -->
+    <section id="journey" data-page="journey" class="section">
+      <div class="section-head">
+        <span class="eyebrow" id="journeyEyebrow">SCREENING HISTORY & TRACKING</span>
+        <h2 id="journeyHeading">My Eye Journey</h2>
+        <p id="journeySub">Track, compare, and review your past glaucoma screening evaluations and download previous PDF
+          reports.</p>
+      </div>
+
+      <div class="panel journey-panel">
+        <div id="journeySummaryBar" class="journey-summary-bar" hidden></div>
+        <div id="journeyList" class="journey-cards-grid">
+          <p class="empty" id="journeyEmptyText">Your screening history will appear here after you save an AI analysis
+            result.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIND DOCTOR & SPECIALIST DIRECTORY (FEATURE 5 ENHANCED) -->
+    <section id="doctors" data-page="doctors" class="section tinted">
+      <div class="section-head">
+        <span class="eyebrow" id="doctorsEyebrow">SPECIALIST DIRECTORY & APPOINTMENTS</span>
+        <h2 id="doctorsHeading">Find Doctor & Book Consultation</h2>
+        <p id="doctorsSub">Find verified eye doctors and ophthalmologists across 8 Tamil Nadu districts and submit
+          consultation requests with verified clinic slots.</p>
+      </div>
+
+      <div class="panel doctor-search-panel">
+        <div class="doctor-filter-row">
+          <div class="filter-group">
+            <label for="doctorCitySelect"><strong id="lblCitySelect">1. Select District / City</strong></label>
+            <select id="doctorCitySelect">
+              <option value="">-- Choose District / City --</option>
+              <option value="Karur">Karur</option>
+              <option value="Tiruchengode">Tiruchengode</option>
+              <option value="Coimbatore">Coimbatore</option>
+              <option value="Salem">Salem</option>
+              <option value="Erode">Erode</option>
+              <option value="Namakkal">Namakkal</option>
+              <option value="Tiruchirappalli">Tiruchirappalli</option>
+              <option value="Madurai">Madurai</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="doctorSelect"><strong id="lblDoctorSelect">2. Select Eye Doctor</strong></label>
+            <select id="doctorSelect" disabled>
+              <option value="">-- Choose a district / city first --</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="doctorDetailsContainer" class="doctor-details-box" hidden></div>
+
+        <!-- Doctor Directory Cards Grid -->
+        <div id="doctorList" class="cards" style="margin-top:20px;">
+          <p class="empty" id="doctorEmptyPrompt">Please select a district or city above to see available eye
+            specialists.</p>
+        </div>
+
+        <!-- FEATURE 5: MY APPOINTMENTS SUBSECTION -->
+        <div style="margin-top:34px;border-top:1px solid var(--line);padding-top:24px;" id="myAppointmentsSection">
+          <div
+            style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
+            <div>
+              <h3 id="myAptsHeading" style="margin:0;font-size:17px;">My Appointment Requests</h3>
+              <p class="muted tiny" id="myAptsSub">Track, reschedule, or cancel your clinic consultation requests.</p>
+            </div>
+            <button type="button" class="soft small" id="refreshAppointmentsBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                <path d="M21 3v5h-5" />
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                <path d="M3 21v-5h5" />
+              </svg>
+              <span id="refreshAptsText">Refresh Appointments</span>
+            </button>
+          </div>
+          <div id="appointmentList" class="item-list">
+            <p class="empty" id="aptsEmptyText">No consultation requests submitted yet. Use the doctor directory above
+              to request an appointment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EYE HEALTH & DAILY TIPS -->
+    <section id="learn" data-page="learn" class="section">
+      <div class="section-head">
+        <span class="eyebrow" id="learnEyebrow">DAILY EYE HEALTH & GUIDANCE</span>
+        <h2 id="learnHeading">Eye health & daily care tips</h2>
+        <p id="learnSub">Medically reviewed eye care guidance deterministically rotated daily to help protect your
+          vision and ocular health.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:30px;">
+        <div
+          style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+          <div>
+            <span class="pill" id="tipsPill">DAILY CARE TIPS</span>
+            <h3 id="tipsDateHeading" style="margin:6px 0 0;font-size:18px;">Today's Eye Care Guidance</h3>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <label style="margin:0;font-size:12px;display:flex;align-items:center;gap:6px;">
+              <span id="lblViewDate">View date:</span>
+              <input type="date" id="tipDatePicker" style="padding:4px 8px;font-size:12px;width:auto;margin:0;">
+            </label>
+            <button class="soft small" id="todayTipsBtn" type="button">Today</button>
+          </div>
+        </div>
+
+        <div id="dailyTipsGrid" class="tips-cards-grid">
+          <p class="empty" id="tipsEmptyPrompt">Loading daily eye care guidance...</p>
+        </div>
+
+        <div class="disclaimer-box" style="margin-top:20px;">
+          <strong id="tipsNoticeHeading">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg> Educational Guidance Notice:
+          </strong>
+          <p id="tipsNoticeText">These eye health tips provide general educational guidance and do not replace advice
+            from a licensed ophthalmologist or optometrist. General eye care tips do not diagnose, prevent, or cure
+            glaucoma. If you experience eye pain, sudden blurring, halos around lights, or changes in vision, seek
+            immediate medical evaluation.</p>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <span class="eyebrow" id="articlesEyebrow">ARTICLES & TOPICS</span>
+        <h2 id="articlesHeading">Educational articles</h2>
+        <p id="articlesSub">Learn more about eye health and routine care.</p>
+      </div>
+      <div id="articleList" class="cards">
+        <p class="empty" id="articlesEmptyPrompt">Published articles will appear here.</p>
+      </div>
+    </section>
+
+    <!-- FEATURE 3: SMART EYE CARE REMINDERS -->
+    <section id="reminders" data-page="reminders" class="section tinted">
+      <div class="section-head">
+        <span class="eyebrow" id="remindersEyebrow">SMART EYE CARE SCHEDULE</span>
+        <h2 id="remindersHeading">Smart Eye Care Reminders</h2>
+        <p id="remindersSub">Never miss a routine examination, doctor appointment, or user-scheduled medication dose.
+          Track, complete, and organize reminders.</p>
+      </div>
+
+      <div class="panel">
+        <form id="reminderForm" class="record-form reminder-grid-form">
+          <label><span id="lblRemTitle">Reminder Title *</span>
+            <input name="title" id="remTitleInput" required placeholder="e.g. Annual Glaucoma Checkup">
+          </label>
+
+          <label><span id="lblRemCategory">Category</span>
+            <select name="category" id="remCategoryInput">
+              <option value="Eye appointment">Eye appointment</option>
+              <option value="Routine checkup">Routine checkup</option>
+              <option value="Prescribed medication reminder">Prescribed medication reminder</option>
+              <option value="General eye-care activity">General eye-care activity</option>
+            </select>
+          </label>
+
+          <label><span id="lblRemDate">Date</span>
+            <input name="reminder_date" id="remDateInput" type="date">
+          </label>
+
+          <label><span id="lblRemTime">Time Slot</span>
+            <input name="reminder_time" id="remTimeInput" type="time">
+          </label>
+
+          <label style="grid-column: span 2;"><span id="lblRemNotes">Notes / Details</span>
+            <input name="description" id="remDescInput" placeholder="Doctor instructions or medication reminder notes">
+          </label>
+
+          <button class="button" type="submit" id="addReminderBtn" style="min-height:44px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span id="addReminderBtnText">Add Reminder</span>
+          </button>
+        </form>
+        <p id="reminderFormMsg" class="form-message" style="margin:8px 0 12px;" aria-live="polite"></p>
+
+        <!-- Filters / Counts -->
+        <div
+          style="display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;flex-wrap:wrap;gap:10px;">
+          <div class="reminder-filters">
+            <button type="button" class="soft small active" id="filterRemAll">All</button>
+            <button type="button" class="soft small" id="filterRemPending">Pending</button>
+            <button type="button" class="soft small" id="filterRemCompleted">Completed</button>
+          </div>
+          <button type="button" class="soft small" id="refreshRemindersBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+              <path d="M21 3v5h-5" />
+              <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+              <path d="M3 21v-5h5" />
+            </svg>
+            <span id="refreshRemText">Refresh</span>
+          </button>
+        </div>
+
+        <div id="reminderList" class="item-list">
+          <p class="empty" id="remindersEmptyPrompt">No eye-care reminders found. Add your first checkup or eye-drop
+            reminder above.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 4: INTERACTIVE EYE ANATOMY -->
+    <section id="anatomy" data-page="anatomy" class="section">
+      <div class="section-head">
+        <span class="eyebrow" id="anatomyEyebrow">OCULAR STRUCTURE & GLAUCOMA CONTEXT</span>
+        <h2 id="anatomyHeading">Interactive Eye Anatomy</h2>
+        <p id="anatomySub">Explore key structures of the human eye. Click on any component to discover its function and
+          understand how the optic nerve relates to glaucoma screening.</p>
+      </div>
+
+      <div class="panel anatomy-panel">
+        <div class="anatomy-grid">
+          <!-- Left: High-Precision Vector Eye Anatomy Illustration & Real Medical Photos -->
+          <div class="anatomy-visual-wrap">
+            <div class="anatomy-visual-header">
+              <span class="anatomy-badge" id="anatomyDiagramBadge">Educational Eye Anatomy</span>
+              <div class="anatomy-view-switcher">
+                <button type="button" class="view-switch-btn active" id="btnViewPhoto"
+                  title="Real Medical Photograph/Diagram">Photo View</button>
+                <button type="button" class="view-switch-btn" id="btnViewDiagram"
+                  title="Interactive Cross-Section Diagram">Diagram View</button>
+              </div>
+            </div>
+
+            <!-- Dynamic Real Medical Image View (Updates on Part Selection) -->
+            <div class="anatomy-image-container" id="anatomyImageContainer">
+              <img id="anatomyDynamicImg" src="/static/images/anatomy/optic_nerve.jpg"
+                alt="Optic Nerve High Resolution View" class="anatomy-photo-view">
+              <div class="anatomy-photo-overlay">
+                <span class="anatomy-photo-title" id="anatomyPhotoTitle">Optic Nerve (Cranial Nerve II)</span>
+                <span class="anatomy-photo-caption" id="anatomyPhotoCaption">The visual cable transmitting ocular light
+                  impulses to the brain</span>
+              </div>
+            </div>
+
+            <!-- Interactive Cross-Section SVG Diagram -->
+            <div class="anatomy-svg-container" id="anatomySvgContainer" style="display:none;">
+              <svg id="anatomySvg" viewBox="0 0 600 450" class="anatomy-svg" role="img"
+                aria-label="Interactive Diagram of the Human Eye">
+                <defs>
+                  <!-- Gradients -->
+                  <radialGradient id="gradCornea" cx="30%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.8" />
+                    <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.2" />
+                  </radialGradient>
+                  <radialGradient id="gradLens" cx="40%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="70%" stop-color="#c7d2fe" />
+                    <stop offset="100%" stop-color="#818cf8" />
+                  </radialGradient>
+                  <radialGradient id="gradVitreous" cx="45%" cy="50%" r="65%">
+                    <stop offset="0%" stop-color="#f0f9ff" />
+                    <stop offset="100%" stop-color="#e0f2fe" />
+                  </radialGradient>
+                  <linearGradient id="gradRetina" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#ef4444" />
+                  </linearGradient>
+                  <linearGradient id="gradOpticNerve" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#fde047" />
+                    <stop offset="100%" stop-color="#ca8a04" />
+                  </linearGradient>
+                  <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                <!-- Sclera / Outer Wall -->
+                <path
+                  d="M 120 225 C 120 90, 240 50, 360 50 C 470 50, 540 120, 550 205 L 595 205 L 595 245 L 550 245 C 540 330, 470 400, 360 400 C 240 400, 120 360, 120 225 Z"
+                  fill="#ffffff" stroke="#cbd5e1" stroke-width="4" />
+
+                <!-- Vitreous Chamber Inner Fill -->
+                <path
+                  d="M 175 225 C 175 110, 260 70, 360 70 C 455 70, 525 130, 532 208 C 520 215, 520 235, 532 242 C 525 320, 455 380, 360 380 C 260 380, 175 340, 175 225 Z"
+                  fill="url(#gradVitreous)" />
+
+                <!-- Choroid & Retina Layer -->
+                <path id="part-retina" class="anatomy-part" data-part="retina"
+                  d="M 180 140 C 250 80, 360 72, 450 80 C 510 110, 530 160, 532 208 L 526 211 C 524 165, 505 118, 448 90 C 360 82, 255 90, 188 148 Z M 180 310 C 250 370, 360 378, 450 370 C 510 340, 530 290, 532 242 L 526 239 C 524 285, 505 332, 448 360 C 360 368, 255 360, 188 302 Z"
+                  fill="url(#gradRetina)" stroke="#b45309" stroke-width="2" cursor="pointer" />
+
+                <!-- Optic Nerve Exit Trunk -->
+                <path id="part-optic_nerve" class="anatomy-part" data-part="optic_nerve"
+                  d="M 530 205 L 595 205 L 595 245 L 530 245 C 532 235, 532 215, 530 205 Z" fill="url(#gradOpticNerve)"
+                  stroke="#a16207" stroke-width="2.5" cursor="pointer" />
+
+                <!-- Optic Disc (The nerve head boundary) -->
+                <ellipse id="part-optic_disc" class="anatomy-part" data-part="optic_disc" cx="530" cy="225" rx="12"
+                  ry="24" fill="#fbbf24" stroke="#d97706" stroke-width="2.5" cursor="pointer" />
+
+                <!-- Optic Cup (The central depression) -->
+                <ellipse id="part-optic_cup" class="anatomy-part" data-part="optic_cup" cx="528" cy="225" rx="6" ry="12"
+                  fill="#fffbeb" stroke="#f59e0b" stroke-width="2" cursor="pointer" />
+
+                <!-- Cornea (Front clear dome) -->
+                <path id="part-cornea" class="anatomy-part" data-part="cornea"
+                  d="M 130 145 C 70 185, 70 265, 130 305 C 115 260, 115 190, 130 145 Z" fill="url(#gradCornea)"
+                  stroke="#0284c7" stroke-width="3" cursor="pointer" />
+
+                <!-- Ciliary Body & Iris -->
+                <path d="M 148 140 L 175 185 L 165 190 L 140 145 Z" fill="#0f766e" />
+                <path d="M 148 310 L 175 265 L 165 260 L 140 305 Z" fill="#0f766e" />
+
+                <!-- Lens (Crystalline natural lens) -->
+                <ellipse id="part-lens" class="anatomy-part" data-part="lens" cx="178" cy="225" rx="14" ry="42"
+                  fill="url(#gradLens)" stroke="#4f46e5" stroke-width="2.5" cursor="pointer" />
+
+                <!-- Interactive Clickable Target Pins -->
+                <g class="anatomy-pin" data-part="cornea" transform="translate(90, 225)">
+                  <circle r="12" fill="#0284c7" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">1</text>
+                </g>
+
+                <g class="anatomy-pin" data-part="lens" transform="translate(178, 160)">
+                  <circle r="12" fill="#4f46e5" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">2</text>
+                </g>
+
+                <g class="anatomy-pin" data-part="retina" transform="translate(380, 75)">
+                  <circle r="12" fill="#dc2626" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">3</text>
+                </g>
+
+                <g class="anatomy-pin" data-part="optic_disc" transform="translate(515, 185)">
+                  <circle r="12" fill="#d97706" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">4</text>
+                </g>
+
+                <g class="anatomy-pin" data-part="optic_cup" transform="translate(515, 265)">
+                  <circle r="12" fill="#f59e0b" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">5</text>
+                </g>
+
+                <g class="anatomy-pin" data-part="optic_nerve" transform="translate(570, 225)">
+                  <circle r="12" fill="#ca8a04" fill-opacity="0.9" />
+                  <circle r="5" fill="#ffffff" />
+                  <text x="-4" y="4" fill="#ffffff" font-size="11" font-weight="bold">6</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Touch / Mobile Friendly Part Selectors Strip -->
+            <div class="anatomy-pill-strip">
+              <button type="button" class="anatomy-chip active" data-part="optic_nerve" id="chipOpticNerve">Optic
+                Nerve</button>
+              <button type="button" class="anatomy-chip" data-part="optic_disc" id="chipOpticDisc">Optic Disc</button>
+              <button type="button" class="anatomy-chip" data-part="optic_cup" id="chipOpticCup">Optic Cup</button>
+              <button type="button" class="anatomy-chip" data-part="retina" id="chipRetina">Retina</button>
+              <button type="button" class="anatomy-chip" data-part="cornea" id="chipCornea">Cornea</button>
+              <button type="button" class="anatomy-chip" data-part="lens" id="chipLens">Lens</button>
+            </div>
+          </div>
+
+          <!-- Right: Educational Anatomy Details & Glaucoma Clinical Connection -->
+          <div class="anatomy-info-wrap">
+            <div class="anatomy-card" id="anatomyDetailCard">
+              <span class="pill" id="anatomyPartCategory">PRIMARY OCULAR STRUCTURE</span>
+              <h3 id="anatomyPartTitle" style="font-size:24px;margin:8px 0 4px;">Optic Nerve</h3>
+              <p class="muted" id="anatomyPartSubtitle" style="font-size:13px;">The visual cable transmitting ocular
+                light impulses to the brain</p>
+
+              <div class="anatomy-detail-box">
+                <h4 id="anatomyFuncHeading">Biological Function</h4>
+                <p id="anatomyFunctionText">The optic nerve is composed of over 1.2 million retinal ganglion cell axons.
+                  It carries electrical impulses generated by the photoreceptors of the retina directly to the visual
+                  cortex of the brain for image interpretation.</p>
+              </div>
+
+              <!-- Crucial Glaucoma Connection Callout -->
+              <div class="anatomy-glaucoma-callout" id="anatomyGlaucomaBox">
+                <div class="callout-header">
+                  <span class="callout-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true" style="vertical-align:middle;">
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg></span>
+                  <strong id="anatomyGlaucomaHeading">Clinical Connection to Glaucoma Screening</strong>
+                </div>
+                <p id="anatomyGlaucomaText">
+                  Glaucoma is primarily an optic neuropathy. When fluid pressure inside the eye (intraocular pressure)
+                  rises or when vascular perfusion is insufficient, the delicate nerve fibers within the optic nerve
+                  suffer irreversible progressive damage. In fundus image screening, eye care algorithms assess the
+                  health, color, and margin of the optic nerve head to detect early thinning or nerve fiber loss before
+                  peripheral vision is permanently degraded.
+                </p>
+              </div>
+
+              <div class="disclaimer-box" style="margin-top:16px;">
+                <p class="tiny muted" id="anatomyDisclaimer">
+                  <strong>Notice:</strong> This interactive model is an educational illustration for patient awareness
+                  and health literacy. It is not an individual patient scan or diagnostic tool.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 6: INTERACTIVE EYE HEALTH QUIZ -->
+    <section id="quiz" class="section tinted" data-page="quiz">
+      <div class="section-head">
+        <span class="eyebrow" id="quizEyebrow">PATIENT EDUCATION & AWARENESS</span>
+        <h2 id="quizHeading">Eye Health & Glaucoma Quiz</h2>
+        <p id="quizSub">Test your knowledge of eye anatomy, glaucoma risks, preventive care, and healthy ocular habits
+          through this interactive educational challenge.</p>
+      </div>
+
+      <div class="panel quiz-panel">
+        <div id="quizContainer">
+          <!-- Quiz Header: Progress & Category -->
+          <div class="quiz-top-bar">
+            <div>
+              <span class="pill" id="quizCategoryPill">ANATOMY & GLAUCOMA</span>
+              <span id="quizCounterText" class="quiz-counter">Question 1 of 5</span>
+            </div>
+            <div class="quiz-score-indicator" id="quizLiveScore">
+              <span id="quizScoreLabel">Score:</span> <strong>0 / 5</strong>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="tour-progress" style="margin:14px 0 20px;">
+            <span id="quizProgressBar" style="width:20%;transition:width .3s;"></span>
+          </div>
+
+          <!-- Question Title -->
+          <h3 id="quizQuestionText" class="quiz-question-title">Which part of the eye carries visual signals directly
+            from the retina to the brain?</h3>
+
+          <!-- Options Grid -->
+          <div class="quiz-options-list" id="quizOptionsList">
+            <!-- Dynamically populated options -->
+          </div>
+
+          <!-- Educational Explanation Banner (Appears after answer selection) -->
+          <div id="quizExplanationBox" class="quiz-explanation-card" hidden>
+            <div class="quiz-exp-badge" id="quizExpBadge">Correct!</div>
+            <p id="quizExpText" class="quiz-exp-text">The optic nerve transmits visual information from the
+              photoreceptors of the retina to the visual processing centers in the brain.</p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="quiz-actions-row">
+            <button type="button" class="soft small" id="quizRestartBtn">Restart Quiz</button>
+            <button type="button" class="button" id="quizNextBtn" disabled>Next Question →</button>
+          </div>
+        </div>
+
+        <!-- Quiz Completion Screen (hidden until all questions are completed) -->
+        <div id="quizResultScreen" class="quiz-result-card" hidden>
+          <div class="quiz-medal-icon" id="quizMedal"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"
+              stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+              style="margin:0 auto;display:block;">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+              <path d="M4 22h16" />
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+            </svg></div>
+          <h3 id="quizResultHeading" style="font-size:26px;margin:8px 0;">Great Job!</h3>
+          <p id="quizResultSub" class="muted">You have completed the Drishti Eye Health & Glaucoma Quiz.</p>
+
+          <div class="quiz-score-display">
+            <span id="quizFinalScoreNumber" style="font-size:42px;font-weight:800;color:var(--teal);">4 / 5</span>
+            <small id="quizScorePercentage" class="muted" style="display:block;">80% Accuracy</small>
+          </div>
+
+          <div class="quiz-summary-box" id="quizSummaryAdvice">
+            <strong id="quizRecTitle">Educational Eye Care Takeaway</strong>
+            <p id="quizRecText">Regular comprehensive eye exams are essential because early-stage glaucoma exhibits no
+              pain or noticeable symptoms. Scheduling routine exams every 1 to 2 years protects against irreversible
+              vision loss.</p>
+          </div>
+
+          <div class="disclaimer-box" style="margin:16px 0;">
+            <p class="tiny muted" id="quizDisclaimerText">
+              <strong>Medical Disclaimer:</strong> This quiz is strictly educational. Quiz scores do not evaluate your
+              medical health or rule out glaucoma. Please schedule a clinical examination with an ophthalmologist.
+            </p>
+          </div>
+
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+            <button type="button" class="button" id="quizPlayAgainBtn">Play Again</button>
+            <a href="#screen" class="button outline" id="quizGoScreenBtn">Try AI Screening</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCOUNT & AUTHENTICATION -->
+    <section id="account" data-page="account" class="section tinted">
+      <div class="section-head">
+        <span class="eyebrow" id="accountEyebrow">YOUR PRIVATE SPACE</span>
+        <h2 id="accountHeading">Sign in to save your journey</h2>
+        <p id="accountSub">Anyone can try the screening without an account. Sign in only if you want your reports,
+          screening results, reminders, and journey saved to your personal account.</p>
+      </div>
+
+      <div class="two-col account-grid">
+        <article class="panel" id="registerPanel">
+          <h3 id="createAccountTitle">Create an account</h3>
+          <form id="registerForm" class="record-form account-form" novalidate>
+            <label><span id="lblRegName">Full name</span>
+              <input id="regName" name="name" autocomplete="name" required maxlength="100" placeholder="Your name">
+              <small class="field-error" id="regNameError"></small>
+            </label>
+            <label><span id="lblRegEmail">Email address</span>
+              <input id="regEmail" name="email" type="email" autocomplete="email" required
+                placeholder="you@example.com">
+              <small class="field-error" id="regEmailError"></small>
+            </label>
+            <label><span id="lblRegPassword">Password</span>
+              <input id="regPassword" name="password" type="password" autocomplete="new-password" required minlength="8"
+                placeholder="8+ characters with a letter and a number">
+              <small class="field-error" id="regPasswordError"></small>
+            </label>
+            <label><span id="lblRegConfirm">Confirm password</span>
+              <input id="regConfirm" name="confirm" type="password" autocomplete="new-password" required
+                placeholder="Re-enter your password">
+              <small class="field-error" id="regConfirmError"></small>
+            </label>
+            <button class="button full" type="submit" id="regSubmitBtn">Create account</button>
+            <p id="registerMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <article class="panel">
+          <h3 id="loginTitle">Welcome back</h3>
+          <form id="loginForm" class="record-form account-form" novalidate>
+            <label><span id="lblLoginEmail">Email address</span>
+              <input id="loginEmail" name="email" type="email" autocomplete="username" required
+                placeholder="you@example.com">
+              <small class="field-error" id="loginEmailError"></small>
+            </label>
+            <label><span id="lblLoginPassword">Password</span>
+              <input id="loginPassword" name="password" type="password" autocomplete="current-password" required
+                placeholder="Your password">
+              <small class="field-error" id="loginPasswordError"></small>
+            </label>
+            <button class="button full" type="submit" id="loginSubmitBtn">Sign in</button>
+            <p id="loginMessage" class="form-message" aria-live="polite"></p>
+          </form>
+
+          <div id="accountStatus" class="account-status" hidden>
+            <p id="signedInText"></p>
+            <p id="accountMessage" class="form-message" aria-live="polite"></p>
+            <button id="logoutButton" class="button outline" type="button">Sign out</button>
+          </div>
+        </article>
+      </div>
+      <p class="muted tiny" id="accountNote" style="text-align:center;margin-top:16px;">Your personal account keeps your
+        screening history, medical records, and eye care notes securely organized in one place.</p>
+    </section>
+
+    <!-- HELP & SECURITY -->
+    <section id="help" data-page="help" class="section">
+      <div class="section-head">
+        <span class="eyebrow" id="helpEyebrow">HERE TO HELP</span>
+        <h2 id="helpHeading">Need a hand?</h2>
+        <p id="helpSub">Use the language menu, voice playback, or accessibility options to adjust the system to your
+          preference.</p>
+      </div>
+      <div class="cards">
+        <article class="content-card">
+          <h3 id="helpCard1Title">Privacy & Security</h3>
+          <p id="helpCard1Text">Your records and personal screenings are private to your account. We prioritize security
+            and privacy in all eye care storage and tracking.</p>
+        </article>
+        <article class="content-card">
+          <h3 id="helpCard2Title">Medical Notice</h3>
+          <p id="helpCard2Text">Drishti provides automated risk screening and educational guidance. It does not replace
+            a comprehensive clinical eye examination, diagnosis, or prescription by an eye specialist.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <b>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        style="vertical-align:middle;margin-right:4px;">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg> Drishti
+    </b>
+    <span id="footerText">Personal Eye Health Assistant · Not a clinical medical device</span>
+    <button class="soft" id="homeFooter" type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        style="vertical-align:middle;margin-right:3px;">
+        <line x1="12" y1="19" x2="12" y2="5" />
+        <polyline points="5 12 12 5 19 12" />
+      </svg>
+      <span id="backToHomeText">Back to Home</span>
+    </button>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODALS & OVERLAYS -->
+  <!-- ========================================================================= -->
+
+  <!-- Record View Modal -->
+  <div id="recordViewModal" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeViewModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="pill" id="viewModalType">Eye report</span>
+      <h3 id="viewModalTitle" style="margin-top:10px;">Record Details</h3>
+      <div class="modal-details-grid">
+        <div class="modal-detail-row"><span id="lblViewModalDate">Record Date:</span><b id="viewModalDate">—</b></div>
+        <div class="modal-detail-row"><span id="lblViewModalCreated">Upload Date:</span><b id="viewModalCreated">—</b>
+        </div>
+        <div class="modal-detail-row"><span id="lblViewModalDesc">Description:</span><b id="viewModalDesc"
+            style="font-weight:normal;max-width:65%;">—</b></div>
+        <div class="modal-detail-row"><span id="lblViewModalStatus">Analysis Status:</span><b
+            id="viewModalAnalysisStatus">None</b></div>
+        <div id="viewModalAnalysisDetailsRow" hidden style="background:var(--bg);padding:10px;border-radius:8px;">
+          <small style="color:var(--muted);display:block;margin-bottom:4px;font-weight:700;">LINKED AI SCREENING</small>
+          <div id="viewModalAnalysisText" style="font-size:13px;color:var(--ink);"></div>
+        </div>
+        <div class="modal-detail-row" id="viewModalFileRow" style="align-items:center;">
+          <span id="lblViewModalAttachment">Attachment:</span>
+          <a id="viewModalFileLink" class="button outline small" href="#" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <span id="viewModalFileLinkText">View / Download</span>
+          </a>
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:18px;">
+        <button type="button" class="button outline small" id="doneViewModalBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Record Edit Modal -->
+  <div id="recordEditModal" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeEditModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h3 id="editRecordHeading">Edit Record Metadata</h3>
+      <p class="muted tiny" id="editRecordSub">Update the title, category, date, or clinical notes for this health
+        record.</p>
+      <form id="recordEditForm" class="modal-form">
+        <input type="hidden" id="editModalId">
+        <label><span id="lblEditTitle">Record title *</span>
+          <input required id="editModalTitle" name="title" type="text" placeholder="e.g. Annual Eye Exam">
+        </label>
+        <div class="modal-form-row">
+          <label><span id="lblEditType">Record Type</span>
+            <select id="editModalType" name="record_type">
+              <option value="Eye report">Eye report</option>
+              <option value="Eye image">Eye image</option>
+              <option value="Fundus photo">Fundus photo</option>
+              <option value="OCT scan">OCT scan</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Test result">Test result</option>
+              <option value="Hospital document">Hospital document</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          <label><span id="lblEditDate">Record Date</span>
+            <input type="date" id="editModalDate" name="record_date">
+          </label>
+        </div>
+        <label><span id="lblEditDesc">Description / Notes</span>
+          <textarea id="editModalDesc" name="description" rows="3"
+            placeholder="Clinical notes, doctor advice, or symptoms"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="soft small" id="cancelEditModalBtn">Cancel</button>
+          <button type="submit" class="button small" id="saveEditModalBtn">Save Changes</button>
+        </div>
+        <p id="editModalMsg" class="form-message" style="margin:4px 0 0;" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Record Delete Modal -->
+  <div id="recordDeleteModal" class="modal-overlay" hidden>
+    <div class="modal-card" style="max-width:440px;">
+      <button type="button" class="modal-close-btn" id="closeDeleteModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h3 style="color:#b42318;" id="deleteRecordTitle">Delete Health Record?</h3>
+      <p id="deleteModalPrompt">Are you sure you want to permanently delete this record? This action will remove the
+        record and its attached file.</p>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px;">
+        <button type="button" class="soft small" id="cancelDeleteModalBtn">Cancel</button>
+        <button type="button" class="button small" id="confirmDeleteModalBtn" style="background:#b42318;">Permanently
+          Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 5: DOCTOR APPOINTMENT BOOKING MODAL -->
+  <div id="appointmentModal" class="modal-overlay" hidden>
+    <div class="modal-card" style="max-width:540px;">
+      <button type="button" class="modal-close-btn" id="closeAptModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="pill" id="aptModalPill">CLINIC CONSULTATION REQUEST</span>
+      <h3 id="aptModalDoctorName" style="margin-top:8px;">Request Doctor Appointment</h3>
+      <p id="aptModalDoctorInfo" class="muted tiny">Hospital / Specialty</p>
+
+      <form id="appointmentForm" class="modal-form" style="margin-top:14px;">
+        <input type="hidden" id="aptDoctorId">
+        <input type="hidden" id="aptDoctorHospital">
+        <input type="hidden" id="aptDoctorCity">
+        <input type="hidden" id="aptDoctorSpec">
+
+        <div class="modal-form-row">
+          <label><span id="lblAptDate">Consultation Date *</span>
+            <input type="date" id="aptDateInput" required>
+          </label>
+          <label><span id="lblAptTime">Preferred Time Slot *</span>
+            <select id="aptTimeInput" required>
+              <option value="">-- Choose Slot --</option>
+              <option value="09:30 AM">Morning 09:30 AM</option>
+              <option value="10:30 AM">Morning 10:30 AM</option>
+              <option value="11:30 AM">Morning 11:30 AM</option>
+              <option value="02:30 PM">Afternoon 02:30 PM</option>
+              <option value="04:00 PM">Evening 04:00 PM</option>
+              <option value="05:30 PM">Evening 05:30 PM</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="modal-form-row">
+          <label><span id="lblAptPatientName">Patient Full Name *</span>
+            <input type="text" id="aptPatientNameInput" required placeholder="Patient name">
+          </label>
+          <label><span id="lblAptPatientPhone">Contact Phone *</span>
+            <input type="tel" id="aptPatientPhoneInput" required placeholder="e.g. +91 98765 43210">
+          </label>
+        </div>
+
+        <label><span id="lblAptReason">Reason for Consultation</span>
+          <textarea id="aptReasonInput" rows="2"
+            placeholder="e.g. Glaucoma evaluation follow-up, elevated CDR check, or visual field screening"></textarea>
+        </label>
+
+        <div class="disclaimer-box" style="margin:10px 0 16px;">
+          <small class="muted" id="aptWorkflowNotice">
+            <strong>Appointment Request Notice:</strong> This action sends an appointment request to the clinic
+            database. Because real-time automated hospital scheduling is subject to emergency clinic demands, your
+            consultation request will be confirmed by front desk staff upon receipt.
+          </small>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="soft small" id="cancelAptModalBtn">Cancel</button>
+          <button type="submit" class="button small" id="submitAptModalBtn">Submit Appointment Request</button>
+        </div>
+        <p id="aptModalMsg" class="form-message" style="margin:6px 0 0;" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FEATURE 3: REMINDER EDIT MODAL -->
+  <div id="reminderEditModal" class="modal-overlay" hidden>
+    <div class="modal-card" style="max-width:480px;">
+      <button type="button" class="modal-close-btn" id="closeRemEditModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h3 id="editRemHeading">Edit Reminder</h3>
+      <form id="reminderEditForm" class="modal-form">
+        <input type="hidden" id="editRemId">
+        <label><span id="lblEditRemTitle">Reminder Title *</span>
+          <input required id="editRemTitle" name="title" type="text">
+        </label>
+        <div class="modal-form-row">
+          <label><span id="lblEditRemCat">Category</span>
+            <select id="editRemCategory" name="category">
+              <option value="Eye appointment">Eye appointment</option>
+              <option value="Routine checkup">Routine checkup</option>
+              <option value="Prescribed medication reminder">Prescribed medication reminder</option>
+              <option value="General eye-care activity">General eye-care activity</option>
+            </select>
+          </label>
+          <label><span id="lblEditRemDate">Date</span>
+            <input type="date" id="editRemDate" name="reminder_date">
+          </label>
+        </div>
+        <label><span id="lblEditRemTime">Time Slot</span>
+          <input type="time" id="editRemTime" name="reminder_time">
+        </label>
+        <label><span id="lblEditRemDesc">Notes</span>
+          <textarea id="editRemDesc" name="description" rows="2"></textarea>
+        </label>
+        <label class="checks" style="margin:8px 0;">
+          <input type="checkbox" id="editRemCompleted"> <span id="lblEditRemCompleted">Mark as Completed</span>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="soft small" id="cancelRemEditBtn">Cancel</button>
+          <button type="submit" class="button small" id="saveRemEditBtn">Update Reminder</button>
+        </div>
+        <p id="editRemMsg" class="form-message" style="margin:4px 0 0;" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FEATURE 7: ACCESSIBILITY SETTINGS MODAL -->
+  <div id="accessibilityModal" class="modal-overlay" hidden>
+    <div class="modal-card" style="max-width:480px;">
+      <button type="button" class="modal-close-btn" id="closeAccessModalBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="pill" id="accessModalPill">READABILITY & COMFORT</span>
+      <h3 id="accessModalHeading" style="margin:8px 0 4px;">Accessibility Settings</h3>
+      <p class="muted tiny" id="accessModalSub">Adjust contrast and text size for an effortless viewing experience.</p>
+
+      <div class="access-toggles-list">
+        <!-- Toggle 1: High Contrast -->
+        <div class="access-toggle-row">
+          <div>
+            <strong id="lblHighContrastTitle">High-Contrast Mode</strong>
+            <small class="muted" style="display:block;" id="lblHighContrastSub">Deep contrast palette for low vision &
+              visual impairment</small>
+          </div>
+          <button type="button" class="toggle-btn" id="toggleHighContrast" aria-pressed="false" role="button">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text" id="txtHighContrast">Off</span>
+          </button>
+        </div>
+
+        <!-- Toggle 2: Large Text -->
+        <div class="access-toggle-row">
+          <div>
+            <strong id="lblLargeTextTitle">Large Text Mode</strong>
+            <small class="muted" style="display:block;" id="lblLargeTextSub">Increases base font size and expands button
+              touch targets</small>
+          </div>
+          <button type="button" class="toggle-btn" id="toggleLargeText" aria-pressed="false" role="button">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text" id="txtLargeText">Off</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="text-align:right;margin-top:20px;">
+        <button type="button" class="button outline small" id="doneAccessBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 2: VOICE-BASED EYE CARE ASSISTANT (FLOATING LAUNCHER & INTERFACE) -->
+  <aside id="voiceAssistantWidget" class="voice-assistant-widget" aria-label="Eye Care Assistant">
+    <!-- Assistant Trigger Floating Button -->
+    <button type="button" id="assistantFabBtn" class="assistant-fab" aria-label="Open Voice Eye Care Assistant"
+      aria-expanded="false" title="Voice Eye Care Assistant">
+      <span class="assistant-fab-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+          <line x1="8" y1="23" x2="16" y2="23" />
+        </svg>
+      </span>
+      <span class="assistant-fab-label" id="assistantFabLabel">Voice Assistant</span>
+    </button>
+
+    <!-- Assistant Chat Window (Expandable) -->
+    <div id="assistantPanel" class="assistant-panel" hidden>
+      <div class="assistant-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="assistant-avatar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </div>
+          <div>
+            <b id="astTitle">Drishti Eye Assistant</b>
+            <small id="astSub" class="ast-status-text">Voice & Navigation Support</small>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeAssistantBtn" aria-label="Close Assistant">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Messages Transcript -->
+      <div class="assistant-chat-body" id="assistantChatBody" role="log" aria-live="polite">
+        <div class="ast-msg bot">
+          <p id="astWelcomeMsg">Hello! I am your Drishti eye care guide. You can speak or type in English, Tamil, or
+            Hindi to ask about glaucoma, eye screening, or to navigate any section of the website.</p>
+        </div>
+      </div>
+
+      <!-- Indicators Strip (Listening / Speaking) -->
+      <div id="assistantIndicator" class="ast-indicator-strip" hidden>
+        <span class="ast-pulse-dot"></span>
+        <span id="astIndicatorText">Listening... Speak now</span>
+      </div>
+
+      <!-- Quick Action Chips -->
+      <div class="ast-chips-row" id="astChipsRow">
+        <button type="button" class="ast-chip" data-query="What is glaucoma?">What is glaucoma?</button>
+        <button type="button" class="ast-chip" data-query="What is cup to disc ratio?">What is CDR?</button>
+        <button type="button" class="ast-chip" data-query="Go to screening">Go to screening</button>
+        <button type="button" class="ast-chip" data-query="Open dashboard">Open dashboard</button>
+      </div>
+
+      <!-- Input Controls -->
+      <div class="assistant-input-bar">
+        <button type="button" class="ast-mic-btn" id="astMicBtn" title="Speak into microphone"
+          aria-label="Speak into microphone">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
+        </button>
+        <input type="text" id="astTextInput" placeholder="Ask a question or request navigation..." autocomplete="off">
+        <button type="button" class="ast-send-btn" id="astSendBtn" title="Send message" aria-label="Send message">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="ast-footer-notice">
+        <small class="muted tiny" id="astDisclaimer">Educational guide only · Not a diagnosis · Consult an
+          ophthalmologist</small>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Welcome Guided Tour Modal (Preserved) -->
+  <div id="firstTimeTourModal" class="modal-overlay" hidden>
+    <div class="modal-card" style="max-width:520px;">
+      <button type="button" class="modal-close-btn" id="closeFirstTourBtn" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="tour-welcome-badge">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </div>
+      <h3 style="margin-bottom:6px;" id="welcomeModalTitle">Welcome to Drishti Eye Health</h3>
+      <p class="muted" style="font-size:13px;line-height:1.5;" id="welcomeModalSub">Your personalized eye health
+        companion for early glaucoma risk screening, medical record storage, and specialist doctor discovery.</p>
+
+      <div class="tour-feature-list">
+        <div class="tour-feature-item">
+          <div style="color:var(--teal);margin-top:2px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+          <div>
+            <b id="tourFeat1Title">AI Glaucoma Screening</b>
+            <small id="tourFeat1Sub">Upload a retinal fundus image and answer clinical risk questions for instant risk
+              assessment.</small>
+          </div>
+        </div>
+        <div class="tour-feature-item">
+          <div style="color:var(--teal);margin-top:2px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+          </div>
+          <div>
+            <b id="tourFeat2Title">Private Medical Vault</b>
+            <small id="tourFeat2Sub">Securely store and organize your ophthalmology reports, prescriptions, and
+              scans.</small>
+          </div>
+        </div>
+        <div class="tour-feature-item">
+          <div style="color:var(--teal);margin-top:2px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div>
+            <b id="tourFeat3Title">Find Eye Specialists</b>
+            <small id="tourFeat3Sub">Discover verified ophthalmologists across 8 Tamil Nadu districts with maps and
+              timings.</small>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px;">
+        <button type="button" class="soft" id="skipTourBtn">Explore Directly</button>
+        <button type="button" class="button" id="startGuidedTourBtn">Take a Quick Tour →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/app.js?v=20261026b"></script>
+  <script src="/static/enhancements.js?v=20261026b"></script>
+</body>
+
+</html>
