@@ -1,2 +1,12 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-*
+__pycache__/
+*.pyc
+drishti.db
+uploads/*
+.env
+.venv/
+ml/dataset/
+ml/model_data/features_cache.npz
+ml/model_data/build.lock
+ml/model_data/setup.log
+ml/model_data/*.tmp*
+ml/model_data/setup.err.log
