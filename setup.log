@@ -1,0 +1,43 @@
+Reference dataset already downloaded.
+Step 2/2: building the reference index (first time ~40 min on CPU)...
+== Running build_index.py ==
+train: 3000 images (1500 glaucoma)
+validation: 770 images (385 glaucoma)
+test: 770 images (385 glaucoma)
+
+Phase 1/2: reference images (the app becomes ready after this)
+  train: loaded from cache
+Index saved - the web app can now analyse images. Measuring accuracy next...
+
+Phase 2/2: measuring accuracy on held-out images
+  validation: 320/770 images (1.4/s, ~333s left)
+  validation: 640/770 images (1.6/s, ~81s left)
+  validation: 770/770 images (1.6/s, ~0s left)
+  test: 320/770 images (1.5/s, ~301s left)
+  test: 640/770 images (1.5/s, ~85s left)
+  test: 770/770 images (1.5/s, ~0s left)
+
+Validation accuracy of each method:
+   79.1%  pretrained classifier as-is
+   83.9%  dataset matching (k=5)
+   84.5%  dataset matching (k=15)
+   84.7%  dataset matching (k=31)
+   84.8%  dataset matching (k=51)
+   84.8%  classifier fitted on dataset (C=0.3)
+   84.3%  classifier fitted on dataset (C=1)
+   84.4%  classifier fitted on dataset (C=3)
+   83.8%  classifier fitted on dataset (C=10)
+   83.4%  classifier fitted on dataset (C=30)
+
+Chosen: classifier fitted on dataset (C=0.3)
+
+TEST accuracy: 81.8% on 770 held-out images (385 glaucoma / 385 normal)
+  Sensitivity (glaucoma found):   90.9%  (350/385)
+  Specificity (normal confirmed): 72.7%  (280/385)
+  Pretrained classifier as-is on the same test images: 74.3%
+
+Non-fundus rejection threshold: best similarity < 79.4% (validation fundus images: min 74.8%, median 95.2%)
+  Test fundus images wrongly rejected: 2/770
+
+Saved final index and metrics.json in D:\final\drishti-project\drishti-project\ml\model_data
+AI setup complete.

@@ -1,0 +1,31 @@
+{
+  "dataset": "Public glaucoma fundus collection (19 sources incl. EyePACS-AIROGS, ODIR, G1020, ORIGA, REFUGE, PAPILA) - Hugging Face Nj-1111/Glaucoma_Dataset",
+  "reference_images": 3000,
+  "status": "complete",
+  "method": "lr",
+  "validation_results": {
+    "pretrained classifier as-is": 79.1,
+    "dataset matching (k=5)": 83.9,
+    "dataset matching (k=15)": 84.5,
+    "dataset matching (k=31)": 84.7,
+    "dataset matching (k=51)": 84.8,
+    "classifier fitted on dataset (C=0.3)": 84.8,
+    "classifier fitted on dataset (C=1)": 84.3,
+    "classifier fitted on dataset (C=3)": 84.4,
+    "classifier fitted on dataset (C=10)": 83.8,
+    "classifier fitted on dataset (C=30)": 83.4
+  },
+  "test_images": 770,
+  "test_accuracy": 81.8,
+  "test_sensitivity": 90.9,
+  "test_specificity": 72.7,
+  "test_confusion": {
+    "true_positive": 350,
+    "true_negative": 280,
+    "false_positive": 105,
+    "false_negative": 35
+  },
+  "pretrained_classifier_test_accuracy": 74.3,
+  "min_similarity": 0.7938,
+  "dataset_note": "Reference images come from 19 public datasets; validation and test images are EyePACS-AIROGS images not used as references."
+}
