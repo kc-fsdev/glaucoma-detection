@@ -1,0 +1,25 @@
+# =====================================================================
+# DRISHTI GLAUCOMA DETECTION SYSTEM - USER GUIDE (NO CMD NEEDED)
+# =====================================================================
+
+METHOD 1: USING UI APPS (RECOMMENDED)
+--------------------------------------
+1. Open "XAMPP Control Panel" from your Windows Start menu or:
+   C:\xampp\xampp-control.exe
+
+2. In the XAMPP window, look for "MySQL" and click the "Start" button.
+   (The MySQL label will turn GREEN and show Port 3306).
+
+3. To view your database visually in your browser:
+   Click the "Admin" button next to MySQL in XAMPP.
+   This opens phpMyAdmin where you can visually inspect drishti_db.
+
+4. To start the Drishti application:
+   Simply double-click "Run_Drishti.bat" in this folder.
+   It checks MySQL, launches the app, and opens your browser automatically!
+
+--------------------------------------
+METHOD 2: COMMAND LINE (OPTIONAL)
+--------------------------------------
+.venv\Scripts\Activate.ps1
+python app.py
